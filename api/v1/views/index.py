@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""!!!!"""
+"""Index (flask blueprints)"""
 
 from api.v1.views import app_views
-from flask import Flask, jsonify, Blueprint
+from flask import jsonify
 from models import storage
 from models.amenity import Amenity
 from models.city import City
@@ -12,29 +12,23 @@ from models.state import State
 from models.user import User
 
 
-abnbText = {
-    "amenities": "Amenity",
-    "cities": "City",
-    "places": "Place",
-    "reviews": "Review",
-    "states": "State",
-    "users": "User"
-}
+classes = {"amenities": Amenity, "cities": City, "places": Place,
+           "reviews": Review, "states": State, "users": User}
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def get_status():
-    """return status"""
+    """status"""
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/stats', strict_slashes=False)
-def hbnbStats():
-    """Retrieve the stats"""
-    new_dict = {}
-    for key, value in abnbText.items():
-        new_dict[key] = storage.count(value)
-    return jsonify(new_dict)
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
+def get_stats():
+    """Count objs"""
+    result = {}
+    for key, value in classes.items():
+        result[key] = storage.count(value)
+    return jsonify(result)
 
 
 if __name__ == "__main__":
