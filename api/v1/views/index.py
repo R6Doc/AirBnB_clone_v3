@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """!!!!"""
+
 from api.v1.views import app_views
 from flask import Flask, jsonify, Blueprint
 from models import storage
@@ -11,14 +12,8 @@ from models.state import State
 from models.user import User
 
 
-abnbText = {
-    "amenities": "Amenity",
-    "cities": "City",
-    "places": "Place",
-    "reviews": "Review",
-    "states": "State",
-    "users": "User"
-}
+abnbText = {"amenities": Amenity, "cities": City, "places": Place,
+           "reviews": Review, "states": State, "users": User}
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
@@ -28,7 +23,7 @@ def get_status():
 
 
 @app_views.route('/stats', strict_slashes=False)
-def hbnbStats():
+def gstats():
     """Retrieve the stats"""
     new_dict = {}
     for key, value in abnbText.items():
