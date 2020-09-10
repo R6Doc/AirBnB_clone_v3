@@ -2,7 +2,7 @@
 """!!!!"""
 
 from api.v1.views import app_views
-from flask import Flask, jsonify, Blueprint
+from flask import Flask, jsonify
 from models import storage
 from models.amenity import Amenity
 from models.city import City
@@ -22,7 +22,7 @@ abnbText = {
 }
 
 
-@app_views.route('/status', methods=['GET'], strict_slashes=False)
+@app_views.route('/status', strict_slashes=False)
 def get_status():
     """return status"""
     return jsonify({"status": "OK"})
