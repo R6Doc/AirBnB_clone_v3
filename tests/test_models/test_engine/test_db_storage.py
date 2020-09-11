@@ -103,6 +103,8 @@ class TestDBstorage(unittest.TestCase):
                                                         instancestate.id))
         self.assertIs(instanceplace, models.storage.get("Place",
                                                         instanceplace.id))
+        self.assertIs(None, models.storage.get("bla", "nothing"))
+        self.assertIs(None, models.storage.get("city", "nothing"))
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
                      "it doesn't belong to DBStorage")
